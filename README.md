@@ -5,52 +5,136 @@ O projeto visa criar uma linguagem capaz de criar, alterar e apresentar gráfico
 https://docs.google.com/presentation/d/1ndJFzW6n1BAp8cgxDI2Hzka_mE9jzAOO7ZUD12ESOVM/edit?usp=sharing
 
 # Sintaxe
-Atualmente, decidiu-se abordar uma sintaxe similar àquela de funções em linguagens de programação, onde será fornecido o nome da função que deseja ser realizada seguida por seus parâmetros:
+Atualmente, decidiu-se abordar uma sintaxe similar àquela de funções em linguagens imperativas, onde a função é chamada pelo seu nome, com os parâmetros sendo passados entre parênteses, com fim de linha marcado por ';' :
 
-função(parâmetro 1, parâmetro 2, <...>)
+função(parâmetro 1, parâmetro 2, <...>);
 
 Por exemplo:
 
-show(equação de gráfico) -> Mostra o output visual.
+show(equação de gráfico); -> Mostra o output visual.
 
-formatation(tipo de equação, conjunto de pontos ordenados) -> Realiza a aproximação de um grupo de pontos ordenados em um tipo de equação desejada (quadrática, exponencial, <...>).
+format(tipo de equação, conjunto de pontos ordenados); -> Realiza a aproximação de um grupo de pontos ordenados em um tipo de equação desejada (quadrática, exponencial, <...>).
 
-operation(operação desejada, equação de gráfico 1, equação de gráfico 2) -> Realiza operações de soma, subtração, <...> entre 2 equações de gráficos para formar uma nova equação.
+operation(operação desejada, equação de gráfico 1, equação de gráfico 2); -> Realiza operações de soma, subtração, <...> entre 2 equações de gráficos para formar uma nova equação.
 
-comparation(equação de gráfico 1, equação de gráfico 2) -> Devolve a notação assintótica entre os inputs.
+compare(equação de gráfico 1, equação de gráfico 2); -> Devolve a notação assintótica entre os inputs.
+
+# Regras do Lexer
+``
+SHOW        : [Ss][Hh][Oo][Ww] ;
+OPERATION   : [Oo][Pp][Ee][Rr][Aa][Tt][Ii][Oo][Nn] ;
+COMPARE     : [Cc][Oo][Mm][Pp][Aa][Rr][Ee] ;
+FORMAT      : [Ff][Oo][Rr][Mm][Aa][Tt] ;
+
+TYPE
+    : [Ll][Ii][Nn][Ee][Aa][Rr]
+    | [Qq][Uu][Aa][Dd][Rr][Aa][Tt][Ii][Cc]
+    | [Cc][Uu][Bb][Ii][Cc]
+    ;
+
+NUMBER      : [0-9]+ ;
+
+SUM         : '+' 
+            | [Ss][Uu][Mm]
+            ;
+MINUS       : '-' 
+            | [Mm][Ii][Nn][Uu][Ss]
+            ;
+DIVIDE      : '+' 
+            | [Dd][Ii][Vv][Ii][Dd][Ee]
+            ;
+MULTIPLY    : '+' 
+            | [Mm][Uu][Ll][Tt][Ii][Pp][Ll][Yy]
+            ;
+POWER       : '+' 
+            | [Pp][Oo][Ww][Ee][Rr]
+            ;
+
+VARIABLE    : [a-zA-Z]+ ;
+
+LPAREN      : '(' ;
+RPAREN      : ')' ;
+COMMA       : ',' ;
+SEMI        : ';' ;
+
+WS          : [ \t\r\n]+ -> skip ;
+`
 
 # Gramática
-A gramática geral seria:
 
-S -> função(parâmetro)
+``
+program
+    : statement SEMI statement* EOF
+    ;
 
-S -> função(parâmetro, A)
+statement
+    : functionCall
+    ;
 
-A ->  parâmetro
+functionCall
+    : SHOW LPAREN arg RPAREN
+    | OPERATION LPAREN argOp RPAREN
+    | COMPARE LPAREN argList RPAREN
+    | FORMAT LPAREN argFormat RPAREN
+    ;
 
-A ->  parâmetro, A
+arg
+    : function
+    ;
 
-Para os exemplos, caso queira uma gramática mais "completa" (evitando se referir a todas funções da mesma forma apesar delas terem diferentes números de parãmetros máximos) poderia utilizar a gramática a seguir:
+argOp
+    : operation COMMA argList
+    ;
 
-S -> show(equação de gráfico)
+argList
+    : function ( COMMA function )*
+    ;
 
-S -> formatation(tipo de equação, conjunto de pontos ordenados)
+function
+    : primary expression
+    ;
 
-S -> operation(operação desejada, A)
+expression
+    : ( operation primary )*
+    ;
 
-S -> comparation(A)
+primary
+    : VARIABLE
+    | NUMBER
+    | LPAREN function RPAREN
+    | functionCall
+    ;
 
-A -> equação de gráfico 1, equação de gráfico 2
+operation
+    : SUM
+    | MINUS
+    | DIVIDE
+    | MULTIPLY
+    | POWER
+    ;
+
+argFormat
+    : TYPE COMMA pairList
+    ;
+
+pairList
+    : pair ( COMMA pair )*
+    ;
+
+pair
+    : LPAREN NUMBER COMMA NUMBER RPAREN
+    ;
+``
 
 # Exemplos
 
-função(paramêtro 1, <...>) -> output
+| função(paramêtro 1, <...>); | output |
 
-comparation(n^2 + n + 1, 3n^2) -> O(n^2 + n + 1) = 3n^2
+| compare(n^2 + n + 1, 3\*n^2); | n^2 + n + 1 = Θ(3\*n^2) | 
 
-operation(sum, n + 1, n^5) -> n^5 + n + 1
+| operation(sum, n + 1, n^5); | n^5 + n + 1 |
 
-formatation(linear, ((1, 1), (2, 2), (3, 3))) -> n
+| format(linear, (1, 1), (2, 2), (3, 3)); | n |
 
 # Integrantes do Projeto
 | Nome |	RA |
