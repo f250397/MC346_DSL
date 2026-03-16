@@ -19,13 +19,13 @@ SUM         : '+'
 MINUS       : '-' 
             | [Mm][Ii][Nn][Uu][Ss]
             ;
-DIVIDE      : '+' 
+DIVIDE      : '/' 
             | [Dd][Ii][Vv][Ii][Dd][Ee]
             ;
-MULTIPLY    : '+' 
+MULTIPLY    : '*' 
             | [Mm][Uu][Ll][Tt][Ii][Pp][Ll][Yy]
             ;
-POWER       : '+' 
+POWER       : '^' 
             | [Pp][Oo][Ww][Ee][Rr]
             ;
 
