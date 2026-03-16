@@ -128,12 +128,10 @@ pair
 
 # Exemplos
 
-| função(paramêtro 1, <...>); | output |
-
-| compare(n^2 + n + 1, 3\*n^2); | n^2 + n + 1 = Θ(3\*n^2) | 
-
+| função(parâmetro 1, <...>); | output |
+|---|---|
+| compare(n^2 + n + 1, 3*n^2); | n^2 + n + 1 = Θ(3*n^2) |
 | operation(sum, n + 1, n^5); | n^5 + n + 1 |
-
 | format(linear, (1, 1), (2, 2), (3, 3)); | n |
 
 # Integrantes do Projeto
