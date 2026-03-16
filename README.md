@@ -11,13 +11,12 @@ função(parâmetro 1, parâmetro 2, <...>);
 
 Por exemplo:
 
-show(equação de gráfico); -> Mostra o output visual.
-
-format(tipo de equação, conjunto de pontos ordenados); -> Realiza a aproximação de um grupo de pontos ordenados em um tipo de equação desejada (quadrática, exponencial, <...>).
-
-operation(operação desejada, equação de gráfico 1, equação de gráfico 2); -> Realiza operações de soma, subtração, <...> entre 2 equações de gráficos para formar uma nova equação.
-
-compare(equação de gráfico 1, equação de gráfico 2); -> Devolve a notação assintótica entre os inputs.
+| função | descrição |
+|---|---|
+| show(equação de gráfico); | Mostra o output visual. |
+| format(tipo de equação, conjunto de pontos ordenados); | Realiza a aproximação de um grupo de pontos ordenados em um tipo de equação desejada (quadrática, exponencial, <...>). |
+| operation(operação desejada, equação de gráfico 1, equação de gráfico 2); | Realiza operações de soma, subtração, <...> entre 2 equações de gráficos para formar uma nova equação. |
+| compare(equação de gráfico 1, equação de gráfico 2); | Devolve a notação assintótica entre os inputs. |
 
 # Regras do Lexer
 ``
