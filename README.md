@@ -1,54 +1,56 @@
-# DSL Project 2D Graph
-O projeto visa criar uma linguagem capaz de criar, alterar e apresentar gráficos 2D para os usuários. Para tanto, a linguagem será capaz de, por exemplo, criar um gráfico visual a partir de equações fornecidas pelo usuário, fornecer equação a partir de conjunto de pares ordenados e realizar operações entre diferentes equações de gráficos.
+# DSL Project Graph
+O projeto visa criar uma linguagem capaz de criar, alterar e apresentar gráficos 2D para os usuários. Para tanto, a linguagem será capaz de, por exemplo, criar um gráfico visual a partir de equações fornecidas pelo usuário, fornecer uma equação a partir de conjunto de pares ordenados e realizar operações entre diferentes equações de gráficos.
 
 # Slides
 https://docs.google.com/presentation/d/1ndJFzW6n1BAp8cgxDI2Hzka_mE9jzAOO7ZUD12ESOVM/edit?usp=sharing
 
 # Sintaxe
-Atualmente, decidiu-se abordar uma sintaxe similar àquela de funções em linguagens de programação, onde será fornecido o nome de uma função que deseja ser realizada e seguida por parâmetros para a função:
+Atualmente, decidiu-se abordar uma sintaxe similar àquela de funções em linguagens de programação, onde será fornecido o nome da função que deseja ser realizada seguida por seus parâmetros:
 
-(função) (paramêtro 1) (paramêtro 2) (<...>)
+função(parâmetro 1, parâmetro 2, <...>)
 
 Por exemplo:
 
-(função de saída) (equação gráfico) -> Mostra o output visual.
+show(equação de gráfico) -> Mostra o output visual.
 
-(função de formatação) (tipo de equação) (ponto ordenado 1) (ponto ordenado 2) (<...>) -> Realiza a aproximação de um grupo de pontos ordenados em um tipo de equação desejada (quadrática, exponencial, <...>).
+formatation(tipo de equação, conjunto de pontos ordenados) -> Realiza a aproximação de um grupo de pontos ordenados em um tipo de equação desejada (quadrática, exponencial, <...>).
 
-(função de operação) (operação desejada) (equação gráfico 1) (equação gráfico 2) -> Realiza operaçãos de soma, subtração, <...> entre dois gráficos para formar um novo gráfico.
+operation(operação desejada, equação de gráfico 1, equação de gráfico 2) -> Realiza operações de soma, subtração, <...> entre 2 equações de gráficos para formar uma nova equação.
 
-(função de comparação) (equação gráfico 1) (equação gráfico 2) -> Devolve a notação assintótica entre os inputs.
+comparation(equação de gráfico 1, equação de gráfico 2) -> Devolve a notação assintótica entre os inputs.
 
 # Gramática
-A gramática mais geral seria:
+A gramática geral seria:
 
-S -> (função) (parâmetro)
+S -> função(parâmetro)
 
-S -> (função) (parâmetro)A
+S -> função(parâmetro, A)
 
-A ->  (parâmetro)
+A ->  parâmetro
 
-A ->  (parâmetro) A
+A ->  parâmetro, A
 
-Para os exemplos, poderia utilizar a gramática a seguir:
+Para os exemplos, caso queira uma gramática mais "completa" (evitando se referir a todas funções da mesma forma apesar delas terem diferentes números de parãmetros máximos) poderia utilizar a gramática a seguir:
 
-S -> (função de saída)(equação gráfico)
+S -> show(equação de gráfico)
 
-S -> (função de formatação)(tipo de equação)(conjunto de pontos ordenados)
+S -> formatation(tipo de equação, conjunto de pontos ordenados)
 
-S -> (função de operação)(operação desejada)A
+S -> operation(operação desejada, A)
 
-S -> (função de comparação)A
+S -> comparation(A)
 
-A -> (equação gráfico 1)(equação gráfico 2)
+A -> equação de gráfico 1, equação de gráfico 2
 
 # Exemplos
 
-(função de comparação) (equação gráfico 1) (equação gráfico 2) -> comparation(n^2+n+1, 3n^2) = (output) O(n^2+n+1) 3n^2
+função(paramêtro 1, <...>) -> output
 
-(função de operação) (operação desejada) (equação gráfico 1) (equação gráfico 2) -> operation(sum, n+1, n^5) = (output) n^5+n+1
+comparation(n^2 + n + 1, 3n^2) -> O(n^2 + n + 1) = 3n^2
 
-(função de formatação) (tipo de equação) (conjunto de pontos ordenados) -> formatation(linear, (1,1), (2,2), (3,3)) = (output) n
+operation(sum, n + 1, n^5) -> n^5 + n + 1
+
+formatation(linear, ((1, 1), (2, 2), (3, 3))) -> n
 
 # Integrantes do Projeto
 | Nome |	RA |
