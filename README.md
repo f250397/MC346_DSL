@@ -123,7 +123,7 @@ pairList
 pair
     : LPAREN NUMBER COMMA NUMBER RPAREN
     ;
-``
+```
 
 # Exemplos
 
