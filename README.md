@@ -19,7 +19,7 @@ Por exemplo:
 | compare(equação de gráfico 1, equação de gráfico 2); | Devolve a notação assintótica entre os inputs. |
 
 # Regras do Lexer
-´´
+```
 SHOW        : [Ss][Hh][Oo][Ww] ;
 OPERATION   : [Oo][Pp][Ee][Rr][Aa][Tt][Ii][Oo][Nn] ;
 COMPARE     : [Cc][Oo][Mm][Pp][Aa][Rr][Ee] ;
@@ -57,11 +57,11 @@ COMMA       : ',' ;
 SEMI        : ';' ;
 
 WS          : [ \t\r\n]+ -> skip ;
-´´
+```
 
 # Gramática
 
-´´
+```
 program
     : statement SEMI statement* EOF
     ;
@@ -123,7 +123,7 @@ pairList
 pair
     : LPAREN NUMBER COMMA NUMBER RPAREN
     ;
-´´
+``
 
 # Exemplos
 
